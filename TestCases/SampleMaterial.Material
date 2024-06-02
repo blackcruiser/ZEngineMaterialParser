@@ -1,0 +1,21 @@
+Material "SampleMaterial"
+{
+    Pass "DefaultPass"
+    {
+        CullingType Front
+        ZTest Less
+        ZWrite Enable
+        Blend 1 Add One Zero, Zero One
+        Stencil {
+            Front {
+                Ref 0
+                ReadMask 1
+                WriteMask 1
+                CompareFunction Less
+                PassOperation Keep
+                FailOperation Keep
+                ZFailOperation Keep
+            }
+        }
+    }
+}

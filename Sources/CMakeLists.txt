@@ -1,0 +1,1 @@
+add_executable(MaterialParser ZMaterialScanner.cpp ZMaterialParser.cpp Main.cpp)
