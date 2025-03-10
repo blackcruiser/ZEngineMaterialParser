@@ -17,5 +17,13 @@ Material "SampleMaterial"
                 ZFailOperation Keep
             }
         }
+
+        VertexShader {
+            "Vertex.shader"
+        }
+
+        FragmentShader {
+            "Fragment.shader"
+        }
     }
 }

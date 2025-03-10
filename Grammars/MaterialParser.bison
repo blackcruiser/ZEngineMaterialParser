@@ -23,7 +23,7 @@ static int yylex(yy::ZMaterialParser::value_type* value, yyFlexLexer& scanner)
 class yyFlexLexer;
 }
 
-%token KEY_MATERIAL KEY_PASS
+%token KEY_MATERIAL KEY_PASS KEY_VERTEX_SHADER KEY_FRAGMENT_SHADER
 %token KEY_BLEND VALUE_BLEND_FACTOR VALUE_BLEND_OPERATION
 %token KEY_ZWRITE
 %token KEY_ZCLIP
@@ -41,6 +41,7 @@ class yyFlexLexer;
 
 %type <Material*> Material
 %type <Pass*> Pass
+%type <Shader*> VertexShader FragmentShader
 %type <RenderState*> RenderState
 %type <EBlendOperation> VALUE_BLEND_OPERATION
 %type <EBlendFactor> VALUE_BLEND_FACTOR
@@ -87,6 +88,13 @@ RenderState: /* empty */                                  { $$ = new RenderState
         $1->blendState.push_back(blendState);
         $$ = $1;
     }
+
+    | RenderState VertexShader                            { $$ = $1; $$->vertexShader = $2; }
+    | RenderState FragmentShader                          { $$ = $1; $$->fragmentShader = $2; }
+
+VertexShader : KEY_VERTEX_SHADER '{' VALUE_STRING '}'     { $$ = new Shader(); $$->path = $3; $$->type = EShaderType::Vertex; }
+
+FragmentShader : KEY_FRAGMENT_SHADER '{' VALUE_STRING '}' { $$ = new Shader(); $$->path = $3; $$->type = EShaderType::Fragment; }
 
 StencilState: /* empty */                                       { $$ = new StencilState(); }
     | StencilState KEY_STENCIL_FRONT '{' StencilBlock '}'       { $$ = $1; $1->front = $4; }

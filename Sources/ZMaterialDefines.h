@@ -91,6 +91,19 @@ enum class EZWriteMode : uint8_t
     Enable,
 };
 
+enum class EShaderType : uint8_t
+{
+    None,
+    Vertex,
+    Fragment
+};
+
+struct Shader
+{
+    std::string path;
+    EShaderType type;
+};
+
 struct RenderState
 {
     ECullingType cullingType;
@@ -99,6 +112,8 @@ struct RenderState
     std::vector<BlendState*> blendState;
     StencilState* stencilState;
     bool zClipType;
+    Shader* vertexShader;
+    Shader* fragmentShader;
 };
 
 struct Pass

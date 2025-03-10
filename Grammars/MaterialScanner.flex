@@ -20,6 +20,9 @@ NEWLINE                     \r\n|\n\r|\n|\r
 Material                        { return ZMaterialParser::token::KEY_MATERIAL; }
 Pass                            { return ZMaterialParser::token::KEY_PASS; }
 
+VertexShader                    { return ZMaterialParser::token::KEY_VERTEX_SHADER; }
+FragmentShader                  { return ZMaterialParser::token::KEY_FRAGMENT_SHADER; }
+
 Blend                           { BEGIN (_BLEND); return ZMaterialParser::token::KEY_BLEND; }
 <_BLEND>{
     Zero                        { yylval->build<EBlendFactor>(EBlendFactor::Zero); return ZMaterialParser::token::VALUE_BLEND_FACTOR; }
